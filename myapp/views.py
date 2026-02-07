@@ -18,6 +18,8 @@ def stream_json(request):
         content_type="application/x-ndjson"
     )
 
+def json_stream(request):
+    return StreamingHttpResponse(generate(), content_type="application/x-ndjson")
 
 def generate():
     for i in range(5):
@@ -25,4 +27,7 @@ def generate():
         time.sleep(1)
 
 def stream_page(request):
+    return render(request, "stream.html")
+
+def json_page(request):
     return render(request, "stream.html")

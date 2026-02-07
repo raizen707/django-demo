@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from myapp.views import stream_json, stream_page
+from myapp.views import json_page, json_stream, stream_json, stream_page
 
 urlpatterns = [
     path("stream/", stream_json, name="stream_json"),
     path("", stream_page),
+    path("json-page/", json_page, name="json_page"),
+    path("json-stream/", json_stream, name="json_stream"),
 
 ]
