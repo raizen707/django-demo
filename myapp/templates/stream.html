@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Django JSON Stream</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #111;
+            color: #0f0;
+            padding: 20px;
+        }
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Streaming JSON</h1>
+<pre id="output"></pre>
+
+<script>
+const output = document.getElementById("output");
+
+fetch("/stream/")
+    .then(response => {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        function read() {
+            reader.read().then(({ done, value }) => {
+                if (done) {
+                    output.textContent += "\n--- stream finished ---";
+                    return;
+                }
+
+                const chunk = decoder.decode(value);
+                output.textContent += chunk;
+
+                read(); // keep reading
+            });
+        }
+
+        read();
+    })
+    .catch(err => {
+        output.textContent = "Error: " + err;
+    });
+</script>
+
+</body>
+</html>
