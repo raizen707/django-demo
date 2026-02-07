@@ -20,3 +20,4 @@ Estados:
 //Relativas -> se determinan con base a la ubicación actual
 //Absolutas -> requieren la ubicación completa
 
+TAREA -> Agregar plantilla html y consumo de nuevo endpoint (metodo)
